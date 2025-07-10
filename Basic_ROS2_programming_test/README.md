@@ -171,7 +171,7 @@ source ~/TF_ws/install/setup.bash
 ros2 run tf_demo tf_listener
 ```
 
-![image](http://127.0.0.1:49742/assets/image-20250710195346-mdkj289.png)
+![image](https://github.com/landersu/PLCT_repository/blob/main/imgs/e7e0760d-4714-43da-bba6-cd0498483760.png)
 
 新终端：
 
@@ -187,7 +187,7 @@ base_link： 位于 world_link 上方 0.5 米处
 
 camera_link： 位于 base_link 上方 0.2 米，前方 0.1 米，并绕 Z 轴旋转
 
-![image](http://127.0.0.1:49742/assets/image-20250710195903-4kzsyg3.png)
+![image](https://github.com/landersu/PLCT_repository/blob/main/imgs/49784295-accc-4e04-98d7-ba83e7a1c9b6.png)
 
 ‍
 
