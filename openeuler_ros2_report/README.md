@@ -45,9 +45,9 @@ sudo yum install ros-humble-turtlesim
 ros2 run turtlesim turtlesim_node
 ```
 
-便会跳出一个窗口，里面刷新了一直海龟。
+便会跳出一个窗口，里面刷新了一只海龟。
 
-![image](http://127.0.0.1:58705/assets/image-20250704160849-zqduhv0.png)
+![image](./imgs/haigui.png)
 
 此时再开一个终端，并输入命令ros2 run turtlesim turtle_teleop_key便可以使用键盘上的方向键控制海龟了。
 
@@ -476,7 +476,7 @@ string name
 ros2 service call /clear std_srvs/srv/Empty
 ```
 
-![image](http://127.0.0.1:58705/assets/image-20250705124617-veelvf0.png)
+![image](./imgs/haigui2.png)
 
 使用该命令删除了绘制的线条。
 
@@ -1229,4 +1229,239 @@ ros2 run py_srvcli client 2 3
 a: 2 b: 3
 ```
 
-‍
+‍创建自定义msg和srv文件
+
+### 创建新软件包
+
+```
+cd ~/ros2_ws/src
+ros2 pkg create --build-type ament_cmake --license Apache-2.0 tutorial_interfaces
+```
+
+tutorial_interfaces是新包的名称。它是并且只能是 ament_cmake 包，但这并不限制可以在哪种类型的包中使用消息和服务。可以在 ament_cmake 包中创建自己的自定义接口，然后在 C++ 或 Python 节点中使用它.
+
+```
+cd tutorial_interfaces
+mkdir msg srv
+```
+
+### 创建自定义
+
+#### msg定义
+
+在msg目录中创建一个新文件Num.msg
+
+```
+vim msg/Num.msg
+```
+
+添加以下内容
+
+```
+int64 num
+```
+
+同时在创建一个Sphere.msg文件
+
+```
+vim msg/Sphere.msg
+```
+
+输入
+
+```
+geometry_msgs/Point center
+float64 radius
+```
+
+此自定义消息使用来自另一个消息包的消息
+
+#### srv定义
+
+在srv目录底下拆功能键一个AddThreeInts.srv的新文件
+
+```
+vim srv/AddThreeInts.srv
+```
+
+添加：
+
+```
+int64 a
+int64 b
+int64 c
+---
+int64 sum
+```
+
+### 编辑CMakeLists.txt
+
+如果要将定义的接口转换为特定语言的代码（如 C++ 和 Python），以便可以在这些语言中使用它们，将以下内容添加到CMakeLists.txt，第一个参数（库名称）必须以包的名称开头。
+
+```
+find_package(geometry_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Num.msg"
+  "msg/Sphere.msg"
+  "srv/AddThreeInts.srv"
+  DEPENDENCIES geometry_msgs # Add packages that above messages depend on, in this case geometry_msgs for Sphere.msg
+)
+```
+
+编辑package.xml，添加以下内容：
+
+```
+<depend>geometry_msgs</depend>
+<buildtool_depend>rosidl_default_generators</buildtool_depend>
+<exec_depend>rosidl_default_runtime</exec_depend>
+<member_of_group>rosidl_interface_packages</member_of_group>
+```
+
+### 构建软件包
+
+```
+cd ~/ros2_ws
+colcon build --packages-select tutorial_interfaces
+```
+
+## 确认msg和srv创建
+
+```
+source install/setup.bash
+```
+
+现在可以使用ros2 interface show命令确认您的接口创建是否有效
+
+```
+ros2 interface show tutorial_interfaces/msg/Num
+ros2 interface show tutorial_interfaces/msg/Sphere
+ros2 interface show tutorial_interfaces/srv/AddThreeInts
+```
+
+返回：
+
+```
+int64 num
+
+geometry_msgs/Point center
+	float64 x
+	float64 y
+	float64 z
+float64 radius
+
+int64 a
+int64 b
+int64 c
+---
+int64 sum
+```
+
+### 测试新街口
+
+#### 使用pub/sub进行测试Num.msg
+
+对上一个测试中的发布者/订阅者包进行一些修改。
+
+Publisher：
+
+```
+import rclpy
+from rclpy.node import Node
+
+from tutorial_interfaces.msg import Num                            # CHANGE
+
+
+class MinimalPublisher(Node):
+
+    def __init__(self):
+        super().__init__('minimal_publisher')
+        self.publisher_ = self.create_publisher(Num, 'topic', 10)  # CHANGE
+        timer_period = 0.5
+        self.timer = self.create_timer(timer_period, self.timer_callback)
+        self.i = 0
+
+    def timer_callback(self):
+        msg = Num()                                                # CHANGE
+        msg.num = self.i                                           # CHANGE
+        self.publisher_.publish(msg)
+        self.get_logger().info('Publishing: "%d"' % msg.num)       # CHANGE
+        self.i += 1
+
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    minimal_publisher = MinimalPublisher()
+
+    rclpy.spin(minimal_publisher)
+
+    minimal_publisher.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+Subscriber：
+
+```
+import rclpy
+from rclpy.node import Node
+
+from tutorial_interfaces.msg import Num                        # CHANGE
+
+
+class MinimalSubscriber(Node):
+
+    def __init__(self):
+        super().__init__('minimal_subscriber')
+        self.subscription = self.create_subscription(
+            Num,                                               # CHANGE
+            'topic',
+            self.listener_callback,
+            10)
+        self.subscription
+
+    def listener_callback(self, msg):
+        self.get_logger().info('I heard: "%d"' % msg.num)  # CHANGE
+
+
+def main(args=None):
+    rclpy.init(args=args)
+
+    minimal_subscriber = MinimalSubscriber()
+
+    rclpy.spin(minimal_subscriber)
+
+    minimal_subscriber.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == '__main__':
+    main()
+```
+
+package.xml
+
+添加以下内容：
+
+```
+<exec_depend>tutorial_interfaces</exec_depend>
+```
+
+最后构建包：
+
+```
+cd ~/ros2_ws
+colcon build --packages-select py_pubsub
+```
+
+打开两个终端，运行：
+
+```
+ros2 run py_pubsub talker
+ros2 run py_pubsub listener
+```
