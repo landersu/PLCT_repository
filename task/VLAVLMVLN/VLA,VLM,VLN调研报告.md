@@ -1,31 +1,5 @@
 # VLA,VLM,VLN调研报告
 
-vla
-[OpenVLA](http://127.0.0.1:63305/#20251116132021-ooraa5x)：开放式视觉-语言-动作模型，用于机器人操纵任务
-[Gato](http://127.0.0.1:63305/#20251116135204-v5l05d7)：DeepMind的多任务多模态智能体
-[RT-2](http://127.0.0.1:63305/#20251116141842-jrxcorf)：RT-1升级版，支持VLM
-[Mobile ALOHA](http://127.0.0.1:63305/#20251116143605-1k1p9g4)：移动双臂操纵平台
-[Vlaser](http://127.0.0.1:63305/#20251116162637-zl6jvot)：强化“推理 + 控制”能力的 VLA 架构
-[Evo‑1](http://127.0.0.1:63305/#20251116163426-tkge19q)：轻量化 VLA 模型，参数较少，部署性强
-[CogACT](http://127.0.0.1:63305/#20251116164509-o09n3m5)：机器人操作为目标的 VLA 模型
-[Octo](http://127.0.0.1:63305/#20251116173609-6n1yms5)：能够处理多种机器人任务
-
-vlm
-[LLaVA-NeXT](http://127.0.0.1:63305/#20251116150753-9ibdjzr)：大规模视觉-语言助手，开源VLM代表作LLaVA的改进版，支持高分辨率图像
-[Qwen-VL](http://127.0.0.1:63305/#20251116152213-kytsbqx)：阿里巴巴的通用视觉语言模型
-[InternVL](http://127.0.0.1:63305/#20251116171030-0tf1c9p)：商汤科技的高效VLM
-[CogVLM](http://127.0.0.1:63305/#20251116172026-omukm6s)：清华大学的VLM
-
-vln
-[Habitat 3.0](http://127.0.0.1:63305/#20251116151708-yqukpu5)：最新版本，支持多智能体
-[VLN-CE](http://127.0.0.1:63305/#20251116152209-deg8g3o)：持续体现化学习
-[SOON](http://127.0.0.1:63305/#20251116154145-6lkbdq8)：语义导向导航
-[Dynam3D](http://127.0.0.1:63305/#20251116155327-f19s0br)：引入 3D 表示改善导航模型
-[COSMO](http://127.0.0.1:63305/#20251116165706-gmf1176)：聚焦低成本、选择性记忆机制的导航模型
-[BERT-based](http://127.0.0.1:63305/#20251116173845-ca4f3bg)：基于BERT的早期VLN方法
-[ViLBERT](http://127.0.0.1:63305/#20251116173858-ic9cuja)：双流视觉语言预训练模型
-[LANA](http://127.0.0.1:63305/#20251116173858-xndj48u)：专门用于导航任务
-[Recurrent VLN Agent](http://127.0.0.1:63305/#20251116173859-6uxluzm)：使用循环结构处理序列化的导航指令
 
 ------
 
@@ -34,6 +8,7 @@ vln
 ### 1.OpenVLA
 
 项目链接：<https://github.com/openvla/openvla>
+
 参考论文：<https://arxiv.org/html/2406.09246v1?utm_source=chatgpt.com>
 
 #### 简介
@@ -49,6 +24,7 @@ vln
 ### 2.Gato
 
 开源复刻仓库（非官方）： <https://github.com/OrigamiDream/gato>
+
 官方论文：<https://arxiv.org/abs/2205.06175>
 
 #### 简介
@@ -80,7 +56,9 @@ Gato 是一款 “通用智能代理”（Generalist Agent）模型，旨在用�
 ### 4.Mobile ALOHA
 
 主页：<https://mobile-aloha.github.io/>
+
 官方论文：[mobile-aloha.pdf](https://mobile-aloha.github.io/resources/mobile-aloha.pdf)
+
 代码仓库：[github.com/MarkFzp/mobile-aloha](https://github.com/MarkFzp/mobile-aloha)
 
 #### 简介
@@ -90,13 +68,17 @@ Gato 是一款 “通用智能代理”（Generalist Agent）模型，旨在用�
 #### 设备
 
 移动底座：论文中提及使用 “Tracer” 移动底盘用于承载双臂系统与遥操作装置。
+
 双臂系统：平台扩展自 ALOHA 系统，具备双臂、多自由度操作能力。
+
 臂可达范围：其硬件规格提到“臂从地面约 65 cm 到 200 cm 的垂直高度”“从基座向外可延伸约 100 cm”。
+
 拖拽力、负载能力：规格中提到可提升拉力至 100 N（在1.5 m高度）或类似指标。
 
 ### ５.Vlaser
 
 论文：[Vlaser: Vision-Language-Action Model with Synergistic Embodied Reasoning](https://arxiv.org/pdf/2510.11027)
+
 代码：[github.com/OpenGVLab/Vlaser/](https://github.com/OpenGVLab/Vlaser/)
 
 #### 简介
@@ -108,13 +90,17 @@ Vlaser 是一个开源的视觉-语言-动作（Vision-Language-Action, VLA）�
 #### 设备
 
 在基准测试中，Vlaser 在 WidowX 机器人上进行了评估 (WidowX benchmark)。
+
 也在 “Google Robot” 基准 (Google Robot benchmark) 上进行了测试。
+
 论文中使用的是离线 /模拟策略 (policy)，并不一定说明真实物理硬件训练时使用了具体型号的 “机械臂品牌 +型号” 来收集训练数据 (至少在公开论文里没有详列真实机器人硬件进行大规模训练的细节)。
+
 使用 Vlaser-6M 数据集
 
 ### 6.Evo‑1
 
 代码仓库：[GitHub - EO-Robotics/EO1: EO: Open-source Unified Embodied Foundation Model Series](https://github.com/EO-Robotics/EO1?utm_source=chatgpt.com)
+
 论文：[EO-1: Interleaved Vision-Text-Action Pretraining for General Robot Control](https://arxiv.org/html/2508.21112v3?utm_source=chatgpt.com)
 
 #### 简介
@@ -128,14 +114,19 @@ EO‑1 是由 联合 等单位推出的开源“统一化具身基础模型”�
 #### 设备
 
 训练建议使用 “flash‑attn 3 from source with H100 / H800 GPU, CUDA 12.8 for best performance”。
+
 模型可在“仅约 6 GB GPU 内存”上做推理
+
 机器人平台品牌／型号：Widow X（桌面机器人）、Franka Panda（工业机器人臂）、AgiBot G‑1（双臂人形机器人）
 
 ### 7.CogACT
 
 代码仓库：<https://github.com/microsoft/CogACT?utm_source=chatgpt.com>
+
 论文：<https://arxiv.org/abs/2411.19650?utm_source=chatgpt.com>
+
 预训练模型：<https://huggingface.co/CogACT/CogACT-Base?utm_source=chatgpt.com>
+
 项目主页：<https://cogact.github.io/?utm_source=chatgpt.com>
 
 #### 简介
@@ -147,13 +138,18 @@ CogACT 是一个先进的视觉-语言-动作（VLA, Vision-Language-Action）�
 #### 设备
 
 训练硬件：16 × NVIDIA A100 GPU。
+
+
 推理硬件：单块 NVIDIA A6000 GPU（使用 bfloat16 ）。
+
 机器人臂 / 机器人平台：Realman 机械臂：7 DoF + 1-DoF gripper。Franka 机械臂 (Franka robot) 用于真实世界测试。
+
 模拟环境：Google robot 和 WidowX robot（在 SIMPLER 模拟平台中）。
 
 ### 8.Octo
 
 GitHub: <https://github.com/octo-models/octo>
+
 官方网站: <https://octo-models.github.io/>
 
 #### 简介
@@ -163,6 +159,7 @@ Octo是一个基于Transformer架构的扩散策略（diffusion policy）通用�
 #### 设备
 
 推理硬件: 支持NVIDIA 4090等单GPU推理
+
 机器人硬件: WidowX机械臂、UR5工业机械臂、RT-1/RT-2机器人系统、Berkeley双臂机器人系统
 
 ------
@@ -172,6 +169,7 @@ Octo是一个基于Transformer架构的扩散策略（diffusion policy）通用�
 ### 1.LLaVA-NeXT
 
 链接：[github.com/LLaVA-VL/LLaVA-NeXT](https://github.com/LLaVA-VL/LLaVA-NeXT)
+
 模型文档：<https://huggingface.co/docs/transformers/v4.50.0/en/model_doc/llava_next>
 
 #### 简介
@@ -181,11 +179,13 @@ LLaVA‑NeXT 是由 LLaVA 团队于 2024 年左右公开推出的一款大�
 #### 设备
 
 显卡：训练使用的是 NVIDIA A100 GPU（80 GB 版本）集群。
+
 机器人臂／物理设备：在公开资料中，我未能查到该项目明确使用了 “机器人臂” 或物理 robot arm 硬件。
 
 ### ２.Qwen-VL
 
 代码仓库：[github.com/QwenLM/Qwen-VL?utm_source=chatgpt.com](https://github.com/QwenLM/Qwen-VL?utm_source=chatgpt.com)
+
 论文：[[2308.12966\] Qwen-VL: 一种用于理解、定位、文本阅读及更广泛领域的通用视觉语言模型 --- [2308.12966] Qwen-VL: A Versatile Vision-Language Model for Understanding, Localization, Text Reading, and Beyond](https://arxiv.org/abs/2308.12966?utm_source=chatgpt.com)
 
 #### 简介
@@ -197,13 +197,17 @@ Qwen‑VL 是由 （阿里云）开发、基于其大语言模型系列 “通
 #### 设备
 
 模型运行推理（inference）推荐使用 CUDA 11.4 及以上版本。
+
 关于模型运行（而非训练）所需显存／VRAM，有资料指出例如   Qwen‑2.5‑VL 系列在部署时，72B 参数版本推荐使用 80 GB 显存以上。
 
 ### 3.InternVL
 
 代码仓库：<https://github.com/OpenGVLab/InternVL?utm_source=chatgpt.com>
+
 论文:<https://openaccess.thecvf.com/content/CVPR2024/papers/Chen_InternVL_Scaling_up_Vision_Foundation_Models_and_Aligning_for_Generic_CVPR_2024_paper.pdf?utm_source=chatgpt.com>
+
 官方网站 /项目主页：<https://internvl.github.io/?utm_source=chatgpt.com>
+
 最新 InternVL3.5 (开放源代码) 技术报告 (arXiv)：https://arxiv.org/abs/2508.18265?utm_source=chatgpt.com
 
 #### 简介
@@ -215,11 +219,17 @@ InternVL 是由 OpenGVLab 等单位提出的一系列开源视觉–语言基础
 #### 设备
 
 训练硬件：根据 InternVL 的补充材料 (CVPR supplementary)，在 Stage 1 使用了 640 × NVIDIA A100 GPU 进行训练，训练迭代约 175K 步，总计处理约 28.7 十亿 (billion) 图像-文本样本。
+
 训练超参数 (部分)：使用 AdamW 优化器 (β1=0.9, β2=0.95)，cosine 学习率调度，第 1 阶段学习率分别为 1e-3 和 1e-4 (视觉 / 语言)；drop path rate = 0.2。
+
 精度 &计算：第一次训练阶段使用 bf16 (bfloat16)。根据补充材料，还使用 PyTorch + FlashAttention。
+
 训练阶段二 (视觉-语言生成训练)：固定视觉编码器与 QLLaMA，仅训练 cross-attention + learnable queries；使用 160 A100 GPU (160 × A100)，batch size = 20K，共训练 80K 步。
+
 推理 /部署：GitHub 发布说明 (Reproduce InternVL-Chat V1.2) 中指出 Fine-tune (聊天模型) 使用 32 或 64 GPU。例如若使用 64 GPU，则训练大约需要 18 小时。
+
 精度 /输入分辨率：InternVL 支持 “动态高分辨率 (Dynamic High-Resolution)” 输入 —— 将图像切分成多个 448×448 的瓦片 (tiles)，根据输入图像比例动态决定块数 (1–40 块)，支持高达 4K 分辨率。
+
 视觉 token 压缩：在某种版本中 (如 InternVL 1.x)，使用 pixel-unshuffle (即 space2depth) 来减少视觉 token 数目 (原始视觉 token 数可达 1024，然后压缩为四分之一) 以提升效率。
 
 ### 4.CogVLM
@@ -234,7 +244,9 @@ CogVLM 是由清华 KEG（Knowledge Engineering Group）与智谱 AI (ZhipuAI) �
 #### 设备
 
 使用 INT4 (4-bit) 量化 时，只需 1 × RTX 3090 (24GB) 即可运行 CogVLM。
+
 使用 FP16 模式时，建议 1 × A100 (80GB)，或 2 × RTX 3090 (24GB)。
+
 模型架构：根据论文 (Wisdom model PDF)：CogVLM 17B 使用 EVA2-CLIP-E 作为视觉编码器 (ViT)，语言模型采用 Vicuna-7B-v1.5。视觉专家模块 (visual expert) 插入 LLM 每层的 attention 和 FFN：在每层 attention 模块中有一个可训练的 QKV 矩阵 (与 LLM 相同形状)，在 FFN 层有对应的 MLP。
 
 ------
@@ -244,7 +256,9 @@ CogVLM 是由清华 KEG（Knowledge Engineering Group）与智谱 AI (ZhipuAI) �
 ### １.Habitat 3.0
 
 主页：[aihabitat.org/habitat3/](https://aihabitat.org/habitat3/)
+
 官方论文：[[2310.13724\] Habitat 3.0: A Co-Habitat for Humans, Avatars and Robots](https://arxiv.org/abs/2310.13724)
+
 代码仓库：[github.com/facebookresearch/habitat-lab](https://github.com/facebookresearch/habitat-lab)
 
 #### 简介
@@ -258,7 +272,9 @@ CogVLM 是由清华 KEG（Knowledge Engineering Group）与智谱 AI (ZhipuAI) �
 ### ２.VLN-CE
 
 主页：[VLN-CE](https://jacobkrantz.github.io/vlnce/)
+
 论文：[[2004.02857\] 超越导航图：连续环境中的视觉语言导航 --- [2004.02857] Beyond the Nav-Graph: Vision-and-Language Navigation in Continuous Environments](https://arxiv.org/abs/2004.02857?utm_source=chatgpt.com)
+
 代码仓库：[GitHub - jacobkrantz/VLN-CE: Vision-and-Language Navigation in Continuous Environments using Habitat](https://github.com/jacobkrantz/VLN-CE)
 
 #### 简介
@@ -268,8 +284,11 @@ CogVLM 是由清华 KEG（Knowledge Engineering Group）与智谱 AI (ZhipuAI) �
 #### 设备
 
 该模型最初以 0.30 SPL 的 val_unseen 性能被提出，但排行榜将其同一模型评估为 0.27 SPL。该模型在硬件+Habitat 构建上进行训练和评估，结果略有不同，其他论文实验也是如此。
+
 如果可用，Cuda 将默认使用。模拟器和 torch 代码无需在同一个设备上运行。为了更快地训练和评估，建议在 GPU 上运行尽可能多的 NUM_ENVIRONMENTS ，同时假设每个环境使用 1 个 CPU 核心。
+
 在 “Waypoint Models for Instruction‑guided Navigation in Continuous Environments” (ICCV 2021) 中提到，“训练使用了 DDPPO 方式、64 GPU”配合 config 文件。
+
 其他硬件具体信息没有提及
 
 ### ３.SOON
@@ -283,13 +302,17 @@ SOON（Scenario Oriented Object Navigation）提出了一种更贴近现�
 #### 设备
 
 需要 python3.6（因为移除了 allennlp 依赖，所以 python 3.5 应该也可以）
+
 未提及GPU 型号、机器人臂品牌或型号
 
 ### 4.Dynam3D
 
 代码仓库：<https://github.com/microsoft/CogACT?utm_source=chatgpt.com>
+
 项目主页：<https://cogact.github.io/?utm_source=chatgpt.com>
+
 预训练模型：<https://huggingface.co/CogACT/CogACT-Base?utm_source=chatgpt.com>
+
 论文：<https://arxiv.org/abs/2411.19650?utm_source=chatgpt.com>
 
 #### 简介
@@ -309,6 +332,7 @@ CogACT 支持零样本（zero-shot）控制训练中见过的机器人（即与�
 ### 5.COSMO
 
 论文：<https://arxiv.org/abs/2503.24065?utm_source=chatgpt.com>
+
 代码仓库：<https://github.com/hms-dbmi/COSMO?utm_source=chatgpt.com>
 
 #### 简介
@@ -320,12 +344,15 @@ COSMO 是一个为视觉-语言导航 (VLN) 任务设计的高效模型，其目
 #### 设备
 
 Python 3.10+
+
 CUDA 11.8+ (for GPU support)
+
 16GB+ GPU memory (recommended)
 
 ### 6.BERT-based
 
 代码仓库: <https://github.com/google-research/bert>
+
 论文链接: <https://arxiv.org/abs/1810.04805>
 
 #### 简介
@@ -335,13 +362,17 @@ BERT是谷歌于2018年发布的自然语言处理预训练模型，实现了双
 #### 设备
 
 16GB是微调BERT-Large的最低GPU显存需求
+
 12GB可以微调BERT-Base
+
 预训练需要TPU或多GPU集群
 
 ### 7.ViLBERT
 
 GitHub (Facebook官方多任务版本):[ https://github.com/facebookresearch/vilbert-multi-task](https://github.com/facebookresearch/vilbert-multi-task)
+
 GitHub (原始beta版本): <https://github.com/jiasenlu/vilbert_beta>
+
 论文链接: <https://arxiv.org/abs/1908.02265>
 
 #### 简介
@@ -363,7 +394,9 @@ LANA（Language-capable Navigation Agent）是一个在CVPR 2023发表的视觉-
 #### 设备
 
 Python版本3.8
+
 模拟器Matterport3D Simulator v0.1J
+
 视觉特征CLIP-ViT-B-16
 
 ### 9.Recurrent VLN Agent
@@ -377,9 +410,13 @@ Recurrent VLN Agent是指2021年CVPR会议上发表的"VLN⤴BERT: A Recurrent V
 #### 设备
 
 框架PyTorch
+
 模拟器Matterport3D Simulator v0.1
+
 模拟器升级支持v1.0
+
 多GPU评估支持
+
 预训练权重2.5GB
 
 ‍
